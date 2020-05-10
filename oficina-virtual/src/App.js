@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'react-bootstrap'
+
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import * as ROUTES from './utiles/ConfigNavbar'
 
@@ -11,7 +11,7 @@ import './App.css';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter >
         <Switch>
             <Route exact path={ROUTES.INI} component={Home}/>
             <Route path={ROUTES.HOME} component={Home}/>
