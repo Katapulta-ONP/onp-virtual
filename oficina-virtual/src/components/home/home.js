@@ -1,53 +1,73 @@
-import React from 'react'
-import {Row, Col, Container} from 'react-bootstrap'
+import React, {useState}  from 'react'
+import {Button, Row, Col, Container, Nav, CardDeck} from 'react-bootstrap'
+import Cards from './cards'
+import {cards} from './cardsConfig'
+import {FaKey} from 'react-icons/fa'
+import logo from './../../images/others/logo.png'
+import "./home.css"
+import "./home.scss"
+
+import ModalVideo from 'react-modal-video'
+
+const HeaderHome = (props) =>{
+    
+    const [tutorial, setTutorial] = useState(false);
+
+    return(
+        <Container fluid>
+            <Row style={{marginBottom:"2%", marginTop:"2%"}}>
+                <Col sm={4} style={{paddingLeft:"18%"}}><h1>{<img src={logo}/>}</h1></Col>
+                <Col style={{marginRight:"5%",justifyContent:"center", textAlign:"center"}}>
+                    <Row style={{justifyContent:"center", textAlign:"center"}}>
+                        <div style={{ margin:"2%"}}>
+                            <h3><strong>Agrandar letra</strong></h3>
+                            <Button variant="warning" style={{margin:"1%"}} onClick={() => props.setZoom(1)}>A</Button>
+                            <Button variant="warning" style={{margin:"1%"}} onClick={() => props.setZoom(1.3)}>A+</Button>
+                            <Button variant="warning" style={{margin:"1%"}} onClick={() => props.setZoom(1.6)}>A++</Button>
+                        </div>
+                        <div style={{ margin:"2%"}}>
+                            <h3><strong>Guía rápida</strong></h3>
+                            <Button variant="info" onClick={() => setTutorial(true)}>Ver</Button>
+                            <ModalVideo channel='youtube' isOpen={tutorial} videoId='JoOXw5fVsN8' onClose={() =>setTutorial(false)}></ModalVideo>
+                        </div>
+                        <div style={{ margin:"2%"}}>
+                            <Nav.Link href="https://www.onp.gob.pe/paginas/clavevirtual.aspx">
+                                <Button variant="info">
+                                    <div>
+                                        <Row>
+                                            <Col sm={5}><h1><FaKey/></h1></Col>
+                                            <Col sm={5} style={{paddingLeft:"10px", fontSize:"25px"}}><strong>Clave virtual</strong></Col>
+                                        </Row>
+                                    </div>
+                                </Button>
+                            </Nav.Link>
+                        </div>
+                    </Row>
+                </Col>
+            </Row>
+            <div className="header">
+                <h1 className="titleH" style={{zoom: props.zoom}}><strong>Centro de Atención Virtual</strong></h1><br/>
+                <h2 style={{zoom: props.zoom}}>¡Bienvenido, elige una opción para empezar!</h2>    
+            </div>
+        </Container>
+    )
+}
+
+const BodyHome = (props) =>{
+    return(
+        <CardDeck style={{justifyContent:"center"}}>
+            <Cards list={cards} zoom={props.zoom}></Cards>
+        </CardDeck>
+    )
+}
 
 const Home = () =>{
+    const [zoom, setZoom] = useState(1);
     return(
-    <Container className="Home" fluid>
-    <Row className="hijo1">
-        <Col sm={6}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a magna neque. Phasellus gravida posuere sapien, at porta diam hendrerit eu. Maecenas facilisis nibh tortor, quis varius velit faucibus in. Pellentesque dignissim elit varius urna dignissim, ac suscipit metus lobortis. Pellentesque luctus nunc ac convallis sagittis. Suspendisse hendrerit sem a aliquam pretium. Nullam bibendum est sit amet vestibulum suscipit.
-
-Fusce eu odio est. Ut gravida imperdiet mollis. Phasellus orci sem, lacinia a metus quis, luctus suscipit quam. Cras rutrum posuere maximus. Etiam vitae sagittis lacus. Ut varius interdum urna, nec sollicitudin lacus mollis non. Quisque consequat elementum dictum. Donec sit amet hendrerit purus, eget mollis lorem. Etiam sem ante, pharetra at vestibulum id, blandit id lorem. Maecenas lobortis feugiat diam, non interdum erat. Praesent in velit non metus laoreet commodo vitae vel odio. Sed at odio euismod, rutrum risus quis, porta lacus.
-
-Morbi tincidunt luctus turpis. Morbi lobortis velit id fringilla laoreet. Donec sagittis elit vel purus mattis, porta pulvinar lectus suscipit. Nam eu dolor ac elit finibus tristique quis id neque. Mauris porttitor condimentum nibh nec porta. Nam eu dolor nec risus tristique ornare. Aenean eu elit lacus. Ut in iaculis mi. Proin eu convallis mauris. Proin id ligula ut magna porta hendrerit eget interdum orci. Cras commodo vel purus sit amet vestibulum.
-
-Cras in lorem id enim sagittis mollis. Aliquam maximus magna leo, at commodo nibh facilisis at. Vestibulum id suscipit elit, at sagittis lacus. Aliquam enim augue, volutpat sed sollicitudin sed, cursus ut eros. Mauris iaculis eget diam a scelerisque. Nullam interdum tincidunt blandit. Nullam commodo rhoncus nibh, vitae tempor orci vehicula quis. Nunc feugiat tortor mauris, eget tempus turpis congue nec. Donec laoreet bibendum arcu, a iaculis est pharetra sollicitudin. Sed tempus arcu vitae ullamcorper rutrum. Quisque ultrices, elit id commodo suscipit, tortor enim placerat ligula, a finibus magna dolor eget mi.
-
-Nullam mi enim, rutrum eu tellus sed, molestie condimentum magna. Donec vel quam tellus. Proin commodo quis neque ut fermentum. Phasellus pellentesque tempor vulputate. Vivamus id tincidunt tortor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer aliquam dapibus mattis. Morbi auctor massa et velit accumsan congue. Cras tincidunt ut erat ut mollis. Maecenas consequat dui eu eleifend molestie. Fusce quis viverra metus.
-
-Phasellus convallis hendrerit luctus. Nam cursus consequat augue quis auctor. Curabitur mollis porttitor tortor. Cras quis purus eu ante fringilla egestas sit amet id ligula. Mauris nulla est, faucibus nec felis ut, sodales pulvinar tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pulvinar felis tellus, nec porttitor nisi euismod vitae. Nullam imperdiet elit non justo tincidunt fermentum. Vivamus pharetra augue sed pellentesque suscipit. Nunc in turpis at nunc convallis tincidunt.
-
-Quisque rutrum nisl at sapien sodales, non volutpat nulla aliquet. Donec sagittis ipsum quis risus interdum, ac convallis urna varius. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec sed urna non augue cursus egestas. In hac habitasse platea dictumst. Fusce pharetra bibendum quam ornare varius. Suspendisse vel diam bibendum, viverra lectus eget, ornare augue. Nam congue lacus nec pharetra laoreet. Duis pellentesque nisl mauris, nec venenatis est hendrerit nec. Vivamus vestibulum urna sed efficitur elementum. Pellentesque posuere sed tellus eu dictum. Vivamus non sapien vel arcu fermentum eleifend vel eu velit. Nulla facilisi. Praesent at mattis enim, a mollis nisl. Sed placerat egestas lectus, at lacinia leo aliquam volutpat.
-
-Suspendisse sit amet ipsum tincidunt, convallis lorem nec, vehicula leo. Praesent a purus aliquet, viverra felis nec, elementum enim. Aliquam erat volutpat. Vestibulum accumsan quam vitae nisi aliquet egestas. In molestie velit quis lorem ultrices egestas vel id risus. Donec vulputate diam et aliquam eleifend. Integer ac dignissim eros, non dapibus orci. Donec vel luctus lectus. Aenean erat elit, auctor ut arcu vitae, condimentum elementum lacus. Sed ultrices augue dignissim, rutrum est eu, porta urna. Duis nec nulla eget lectus congue vestibulum quis sit amet eros. Cras sodales massa ex, ac volutpat est posuere quis. Cras at odio nibh. Cras ullamcorper odio id orci consequat auctor. Nunc a sem tempus, sagittis velit sed, convallis velit.
-
-Aliquam eu condimentum purus. Ut viverra urna nec sem luctus tristique. Proin iaculis quis neque quis egestas. Ut aliquet placerat nunc eu tempus. Quisque sodales nulla eget tortor imperdiet, non commodo purus varius. Integer malesuada tellus vel leo tempus, ut convallis eros scelerisque. Vestibulum fermentum, purus a rutrum pretium, sem massa ullamcorper orci, eget varius mauris nisl dignissim eros. Donec hendrerit scelerisque nisl, id varius felis volutpat et. Donec augue ex, porttitor ac commodo sed, facilisis at mi. Praesent vulputate dapibus sapien vel ullamcorper. Morbi venenatis mauris nisi, in pellentesque metus vestibulum at. Sed erat erat, convallis a ultrices id, rutrum et velit.
-
-Maecenas in interdum arcu, a finibus purus. Aenean quis quam elit. Etiam malesuada elit nulla. Vivamus ornare sapien pretium imperdiet feugiat. Maecenas auctor arcu non metus suscipit, a placerat metus dictum. Cras tincidunt elit non hendrerit blandit. Quisque euismod urna ante, quis euismod enim aliquam in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consequat elit sed volutpat pharetra. Suspendisse erat elit, ultricies vitae congue ac, ultrices sed mi. Donec non ante venenatis, rutrum lorem eu, commodo est. Vestibulum dictum est sed aliquet aliquam. Proin quis tellus ullamcorper, facilisis elit nec, blandit eros. Duis quis condimentum justo. Vivamus eget convallis eros.
-</Col>
-<Col sm={6} className="hijo2">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a magna neque. Phasellus gravida posuere sapien, at porta diam hendrerit eu. Maecenas facilisis nibh tortor, quis varius velit faucibus in. Pellentesque dignissim elit varius urna dignissim, ac suscipit metus lobortis. Pellentesque luctus nunc ac convallis sagittis. Suspendisse hendrerit sem a aliquam pretium. Nullam bibendum est sit amet vestibulum suscipit.
-
-Fusce eu odio est. Ut gravida imperdiet mollis. Phasellus orci sem, lacinia a metus quis, luctus suscipit quam. Cras rutrum posuere maximus. Etiam vitae sagittis lacus. Ut varius interdum urna, nec sollicitudin lacus mollis non. Quisque consequat elementum dictum. Donec sit amet hendrerit purus, eget mollis lorem. Etiam sem ante, pharetra at vestibulum id, blandit id lorem. Maecenas lobortis feugiat diam, non interdum erat. Praesent in velit non metus laoreet commodo vitae vel odio. Sed at odio euismod, rutrum risus quis, porta lacus.
-
-Morbi tincidunt luctus turpis. Morbi lobortis velit id fringilla laoreet. Donec sagittis elit vel purus mattis, porta pulvinar lectus suscipit. Nam eu dolor ac elit finibus tristique quis id neque. Mauris porttitor condimentum nibh nec porta. Nam eu dolor nec risus tristique ornare. Aenean eu elit lacus. Ut in iaculis mi. Proin eu convallis mauris. Proin id ligula ut magna porta hendrerit eget interdum orci. Cras commodo vel purus sit amet vestibulum.
-
-Cras in lorem id enim sagittis mollis. Aliquam maximus magna leo, at commodo nibh facilisis at. Vestibulum id suscipit elit, at sagittis lacus. Aliquam enim augue, volutpat sed sollicitudin sed, cursus ut eros. Mauris iaculis eget diam a scelerisque. Nullam interdum tincidunt blandit. Nullam commodo rhoncus nibh, vitae tempor orci vehicula quis. Nunc feugiat tortor mauris, eget tempus turpis congue nec. Donec laoreet bibendum arcu, a iaculis est pharetra sollicitudin. Sed tempus arcu vitae ullamcorper rutrum. Quisque ultrices, elit id commodo suscipit, tortor enim placerat ligula, a finibus magna dolor eget mi.
-
-Nullam mi enim, rutrum eu tellus sed, molestie condimentum magna. Donec vel quam tellus. Proin commodo quis neque ut fermentum. Phasellus pellentesque tempor vulputate. Vivamus id tincidunt tortor. Interdum et malesuada fames ac ante ipsum primis in faucibus. Integer aliquam dapibus mattis. Morbi auctor massa et velit accumsan congue. Cras tincidunt ut erat ut mollis. Maecenas consequat dui eu eleifend molestie. Fusce quis viverra metus.
-
-Phasellus convallis hendrerit luctus. Nam cursus consequat augue quis auctor. Curabitur mollis porttitor tortor. Cras quis purus eu ante fringilla egestas sit amet id ligula. Mauris nulla est, faucibus nec felis ut, sodales pulvinar tellus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pulvinar felis tellus, nec porttitor nisi euismod vitae. Nullam imperdiet elit non justo tincidunt fermentum. Vivamus pharetra augue sed pellentesque suscipit. Nunc in turpis at nunc convallis tincidunt.
-
-Quisque rutrum nisl at sapien sodales, non volutpat nulla aliquet. Donec sagittis ipsum quis risus interdum, ac convallis urna varius. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec sed urna non augue cursus egestas. In hac habitasse platea dictumst. Fusce pharetra bibendum quam ornare varius. Suspendisse vel diam bibendum, viverra lectus eget, ornare augue. Nam congue lacus nec pharetra laoreet. Duis pellentesque nisl mauris, nec venenatis est hendrerit nec. Vivamus vestibulum urna sed efficitur elementum. Pellentesque posuere sed tellus eu dictum. Vivamus non sapien vel arcu fermentum eleifend vel eu velit. Nulla facilisi. Praesent at mattis enim, a mollis nisl. Sed placerat egestas lectus, at lacinia leo aliquam volutpat.
-
-Suspendisse sit amet ipsum tincidunt, convallis lorem nec, vehicula leo. Praesent a purus aliquet, viverra felis nec, elementum enim. Aliquam erat volutpat. Vestibulum accumsan quam vitae nisi aliquet egestas. In molestie velit quis lorem ultrices egestas vel id risus. Donec vulputate diam et aliquam eleifend. Integer ac dignissim eros, non dapibus orci. Donec vel luctus lectus. Aenean erat elit, auctor ut arcu vitae, condimentum elementum lacus. Sed ultrices augue dignissim, rutrum est eu, porta urna. Duis nec nulla eget lectus congue vestibulum quis sit amet eros. Cras sodales massa ex, ac volutpat est posuere quis. Cras at odio nibh. Cras ullamcorper odio id orci consequat auctor. Nunc a sem tempus, sagittis velit sed, convallis velit.
-
-Aliquam eu condimentum purus. Ut viverra urna nec sem luctus tristique. Proin iaculis quis neque quis egestas. Ut aliquet placerat nunc eu tempus. Quisque sodales nulla eget tortor imperdiet, non commodo purus varius. Integer malesuada tellus vel leo tempus, ut convallis eros scelerisque. Vestibulum fermentum, purus a rutrum pretium, sem massa ullamcorper orci, eget varius mauris nisl dignissim eros. Donec hendrerit scelerisque nisl, id varius felis volutpat et. Donec augue ex, porttitor ac commodo sed, facilisis at mi. Praesent vulputate dapibus sapien vel ullamcorper. Morbi venenatis mauris nisi, in pellentesque metus vestibulum at. Sed erat erat, convallis a ultrices id, rutrum et velit.
-
-Maecenas in interdum arcu, a finibus purus. Aenean quis quam elit. Etiam malesuada elit nulla. Vivamus ornare sapien pretium imperdiet feugiat. Maecenas auctor arcu non metus suscipit, a placerat metus dictum. Cras tincidunt elit non hendrerit blandit. Quisque euismod urna ante, quis euismod enim aliquam in. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer consequat elit sed volutpat pharetra. Suspendisse erat elit, ultricies vitae congue ac, ultrices sed mi. Donec non ante venenatis, rutrum lorem eu, commodo est. Vestibulum dictum est sed aliquet aliquam. Proin quis tellus ullamcorper, facilisis elit nec, blandit eros. Duis quis condimentum justo. Vivamus eget convallis eros.
-        </Col>
-    </Row>
-    </Container>
+        <div>
+            <HeaderHome zoom={zoom} setZoom={setZoom}/>
+            <BodyHome zoom={zoom}/>
+        </div>
     )
 }
 

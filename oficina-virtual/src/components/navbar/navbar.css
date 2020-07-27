@@ -1,0 +1,59 @@
+.logo{
+    height: 5vh;
+    width: 8vh;
+}
+.icons{
+    text-align: center;
+}
+
+/* cambiar el color de fondo a la barra */
+.color-nav {
+    background-color: #144d74;
+    color:white
+}
+
+.nav-item{
+    color: #ffffff
+}
+.nav-item:hover{
+    background-color:  #0e3750;
+    color: #ffffff
+}
+
+.color-nav-pensionista {
+    background-color: #56549E
+}
+
+.nav-item-pensionista:hover{
+    background-color:  #2D2C56;
+    color: #ffffff
+}
+
+.height-nav{
+    margin-top: 10px;
+}
+
+.color-text{
+    color: #f1f1f1;
+    font-family: MyriadPro-Semibold;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.nav-act .nav-link.active, .nav-pills .show>.nav-link{
+    
+    background-color:  #0e3750;
+    color: #ffffff;
+}
+
+  .img-icon{
+    width: 25px;
+    margin-top: -7px;
+    margin-right: 5px
+  }
+
+  .font-text-header{
+    color: #2c2c2c;
+    font-family: MyriadPro-Bold;
+    font-size: 50px;
+}

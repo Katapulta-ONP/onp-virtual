@@ -9,8 +9,23 @@ import Home from './components/home/home'
 
 import './App.css';
 
+import backgroundImagen from './images/others/fondo.png'
+
+const homeStyle={
+  height:`100vh`,
+  margin:`0`,
+  display: `flex`,
+  flexDirection: `column`,
+  backgroundImage:`url(${backgroundImagen})`,
+  backgroundPosition:`center`,
+  backgroundRepeat:`no-repeat`,
+  backgroundAttachment:`fixed`,
+  backgroundSize: `cover`,
+}
+
 function App() {
   return (
+    <div style={homeStyle}>
     <BrowserRouter>
         <Switch>
             <Route exact path={ROUTES.INI} component={Home}/>
@@ -18,7 +33,8 @@ function App() {
             <Route path={ROUTES.SOY_PENSIONISTA} component={Pensionista}/>
             <Route path={ROUTES.NO_SOY_PENSIONISTA} component={NoPensionista}/>
         </Switch>
-    </BrowserRouter>    
+    </BrowserRouter>
+    </div> 
   );
 }
 
